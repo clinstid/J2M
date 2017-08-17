@@ -74,25 +74,25 @@
 	 * @param {string} input
 	 * @returns {string}
 	 */
-	function toJ(input) {
+	function toJ(input, indentLength) {
 		// remove sections that shouldn't be recursively processed
 		var START = 'J2MBLOCKPLACEHOLDER';
 		var replacementsList = [];
 		var counter = 0;
-		
+
 		input = input.replace(/`{3,}(\w+)?((?:\n|.)+?)`{3,}/g, function(match, synt, content) {
 		    var code = '{code';
-		
+
 		    if (synt) {
 		        code += ':' + synt;
 		    }
-		
+
 		    code += '}' + content + '{code}';
 		    var key = START + counter++ + '%%';
 		    replacementsList.push({key: key, value: code});
 		    return key;
 		});
-		
+
 		input = input.replace(/`([^`]+)`/g, function(match, content) {
 		    var code = '{{'+ content + '}}';
 		    var key = START + counter++ + '%%';
@@ -118,7 +118,7 @@
   		input = input.replace(/^(\s*)- (.*)$/gm, function (match,level,content) {
     			var len = 2;
     			if(level.length > 0) {
-        			len = parseInt(level.length/4.0) + 2;
+        			len = parseInt(level.length/indentLength) + 2;
     			}
     			return Array(len).join("-") + ' ' + content;
   		});

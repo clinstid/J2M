@@ -23,7 +23,7 @@ var input = '';
  */
 function convert() {
 	if (settings.toJ) {
-		console.log(J2M.toJ(input));
+		console.log(J2M.toJ(input, settings.indentLength));
 	} else if (settings.toM) {
 		console.log(J2M.toM(input));
 	} else {
