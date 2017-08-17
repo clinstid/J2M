@@ -6,7 +6,7 @@ var colors = require('colors');
 var settings = {
     toM:  !!(argv.m || argv.toM),
     toJ: !!(argv.j || argv.toJ),
-    indentLength: !!(argv.i || argv.indentLength),
+    indentLength: argv.i,
     stdin: !!argv.stdin,
     filename: argv._[argv._.length - 1]
 };
@@ -19,7 +19,7 @@ var USAGE = "J2M: Convert from JIRA text formatting to GitHub Flavored MarkDown 
     "Options: \n" +
     "--toM, -m:          Treat input as jira text and convert it to Markdown \n" +
     "--toJ, -j:          Treat input as markdown text and convert it to Jira \n" +
-    "--indentLength, -i: Indentation length in number of spaces \n" +
+    " -i:                Indentation length in number of spaces \n" +
     "--stdin:            Read input from stdin. In this case the give filename is ignored \n";
 
 function exit(message, code) {
