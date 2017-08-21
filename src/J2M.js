@@ -80,6 +80,10 @@
         var replacementsList = [];
         var counter = 0;
 
+        // Match code blocks like:
+        // ```
+        // my code
+        // ```
         input = input.replace(/`{3,}(\w+)?((?:\n|.)+?)`{3,}/g, function(match, synt, content) {
             var code = '{code';
 
@@ -93,6 +97,7 @@
             return key;
         });
 
+        // Match inline code blocks like `my code`
         input = input.replace(/`([^`]+)`/g, function(match, content) {
             var safe_content = content.replace(/{/g, "&#123;");
             safe_content = safe_content.replace(/}/g, "&#125;");
@@ -103,12 +108,16 @@
             return key;
         });
 
+        // Match inline code blocks like `my code`
+        // TODO: Figure out why this is here in addition to the previous block
         input = input.replace(/`([^`]+)`/g, '{{$1}}');
 
+        // Match beginning of line with multiple equals or hyphens for a header
         input = input.replace(/^(.*?)\n([=-])+$/gm, function (match,content,level) {
             return 'h' + (level[0] === '=' ? 1 : 2) + '. ' + content;
         });
 
+        // Match # at beginning of line to specify a header
         input = input.replace(/^([#]+)(.*?)$/gm, function (match,level,content) {
             return 'h' + level.length + '.' + content;
         });
