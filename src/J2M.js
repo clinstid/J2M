@@ -94,7 +94,10 @@
         });
 
         input = input.replace(/`([^`]+)`/g, function(match, content) {
-            var code = '{{'+ content + '}}';
+            var safe_content = content.replace(/{/, "&#123;");
+            safe_content = safe_content.replace(/}/, "&#125;");
+
+            var code = '{{'+ safe_content + '}}';
             var key = START + counter++ + '%%';
             replacementsList.push({key: key, value: code});
             return key;
