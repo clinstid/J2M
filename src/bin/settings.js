@@ -19,7 +19,7 @@ var USAGE = "J2M: Convert from JIRA text formatting to GitHub Flavored MarkDown 
     "Options: \n" +
     "--toM, -m:          Treat input as jira text and convert it to Markdown \n" +
     "--toJ, -j:          Treat input as markdown text and convert it to Jira \n" +
-    " -i:                Indentation length in number of spaces \n" +
+    " -i:                Indentation length in number of spaces (default: 2)\n" +
     "--stdin:            Read input from stdin. In this case the give filename is ignored \n";
 
 function exit(message, code) {
@@ -32,7 +32,7 @@ if (settings.indentLength) {
     settings.indentLength = Number(settings.indentLength);
 }
 else {
-    settings.indentLength = 4
+    settings.indentLength = 2
 }
 
 
