@@ -117,8 +117,11 @@
             var to = (wrapper.length === 1) ? '_' : '*';
             return to + content + to;
         });
-        // Make multi-level bulleted lists work
-        input = input.replace(/^(\s*)- (.*)$/gm, function (match,level,content) {
+
+        // Make multi-level bulleted lists work. Figure out indent level by
+        // counting whitespace at the beginning of the line and then dividing
+        // by the specified indentLength.
+        input = input.replace(/^([ \t]*)- (.*)$/gm, function (match,level,content) {
             var len = 2;
             if(level.length > 0) {
                 len = parseInt(level.length/indentLength) + 2;
